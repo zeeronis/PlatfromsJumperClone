@@ -15,10 +15,19 @@ public class PoolManager : MonoBehaviour
     private void Awake()
     {
         pooledObjs.Add(typeof(Platform), new List<PooledObject>());
+        pooledObjs.Add(typeof(Coin), new List<PooledObject>());
+        pooledObjs.Add(typeof(IncreaseNumEffect), new List<PooledObject>());
+        pooledObjs.Add(typeof(StayEnemy), new List<PooledObject>());
+        pooledObjs.Add(typeof(WalkEnemy), new List<PooledObject>());
+
         for (int i = 0; i < prespawnCount; i++)
         {
+
             SpawnObject<Platform>(Vector3.zero, Quaternion.identity, setActive: false);
-         //   SpawnObject<Coin>(Vector3.zero, Quaternion.identity, setActive: false);
+            SpawnObject<Coin>(Vector3.zero, Quaternion.identity, setActive: false);
+            SpawnObject<IncreaseNumEffect>(Vector3.zero, Quaternion.identity, setActive: false);
+            SpawnObject<StayEnemy>(Vector3.zero, Quaternion.identity, setActive: false);
+            SpawnObject<WalkEnemy>(Vector3.zero, Quaternion.identity, setActive: false);
         }
     }
 
@@ -33,8 +42,11 @@ public class PoolManager : MonoBehaviour
             {
                 obj = (T)Instantiate(item, pos, rot, spawnTransform);
                 pooledObjs[typeof(T)].Add(obj);
+
                 if (setActive)
                     obj.SetActive();
+                else
+                    obj.gameObject.SetActive(false);
 
                 return obj;
             }

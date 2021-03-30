@@ -27,6 +27,13 @@ public class CameraConstantWidth : MonoBehaviour
         UpdateView();
     }
 
+#if UNITY_EDITOR
+    private void Update()
+    {
+        UpdateView();
+    }
+#endif
+
     private void UpdateView()
     {
         if (componentCamera.orthographic)
